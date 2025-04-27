@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block title %}Movie List{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 30px 0 20px;
+            color: #f8f8f8;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .add-link {
+            display: block;
+            width: max-content;
+            margin: 0 auto 30px auto;
+            padding: 10px 20px;
+            background: #e50914;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .add-link:hover {
+            background: #b00610;
+        }
+
+        form.search-form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form.search-form input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+
+        form.search-form button {
+            padding: 10px 20px;
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .movie-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 0 20px 40px;
+        }
+
+        .movie-row {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            background: linear-gradient(to right, #1c1c1c, #292929);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .movie {
+            background-color: transparent;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .movie:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .movie img {
+            width: 100%;
+            aspect-ratio: 2 / 3;
+            object-fit: cover;
+            display: block;
+        }
+
+        .movie-title {
+            padding: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            color: #f2f2f2;
+        }
+
+        @media (max-width: 1200px) {
+            .movie-row {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .movie-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+
+    <h1>Movie List</h1>
+
+    <form method="get" action="" class="search-form">
+        <input type="text" name="q" placeholder="Search movies..." value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="movie-grid">
+        {% for movie in movies %}
+            {% if forloop.first or forloop.counter0|divisibleby:6 %}
+            <div class="movie-row">
+            {% endif %}
+
+                <div class="movie">
+                    <a href="{% url 'movie_detail' movie.pk %}" style="text-decoration: none; color: inherit;">
+                        <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+                        <div class="movie-title">{{ movie.title }}</div>
+                    </a>
+                </div>
+
+            {% if forloop.counter|divisibleby:6 or forloop.last %}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
