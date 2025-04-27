@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .banner {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      color: white;
+      height: 500px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .banner::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* ปรับความทึบได้ตามต้องการ */
+      z-index: 1;
+    }
+
+    .banner > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .banner h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar {
+      background-color: #1c1c1c;
+    }
+
+    footer {
+      background-color: #1c1c1c;
+    }
+
+    .carousel-caption {
+      position: absolute;
+      z-index: 3;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    #line1::after, #line2::after {
+      content: '|';
+      animation: blink 1s infinite;
+      margin-left: 2px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark">
+    <div class="container">
+      <a href="#" class="navbar-brand">MovieReview</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar1">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar1">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about">ABOUT</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="banner" style="background-image: url('https://runforthehillslondon.files.wordpress.com/2013/08/film-wallpaper-square-close.jpg');">
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="banner" style="background-image: url('https://4kwallpapers.com/images/wallpapers/inside-out-2-movie-3840x2160-16762.jpg');">
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="banner" style="background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5298bac0-b8bf-4c80-af67-725c1272dbb0/dgue2co-18e8b1c6-619f-4785-82fa-76c1766d3f0b.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzUyOThiYWMwLWI4YmYtNGM4MC1hZjY3LTcyNWMxMjcyZGJiMFwvZGd1ZTJjby0xOGU4YjFjNi02MTlmLTQ3ODUtODJmYS03NmMxNzY2ZDNmMGIuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.b5ZkPEYHEgaFL6_NF92VvWaC3w2uBVeGH6rpVwweY5c');">
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="carousel-caption">
+    <h1 id="line1"></h1>
+    <p id="line2" style="font-size: 1rem; font-weight: normal;"></p>
+  </div>
+
+  {% block content %}{% endblock %}
+
+  <footer class="text-light py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Adress</h5>
+          <p><i class="bi bi-envelope-fill"></i> Email: example@email.com</p>
+          <p><i class="bi bi-telephone-fill"></i> โทร: 012-345-6789</p>
+          <p><i class="bi bi-geo-alt-fill"></i> ที่อยู่: Sripatum University</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <h5>Contact</h5>
+          <a href="#" class="text-light me-3"><i class="bi bi-facebook" style="font-size: 1.5rem;"></i></a>
+          <a href="#" class="text-light me-3"><i class="bi bi-instagram" style="font-size: 1.5rem;"></i></a>
+          <a href="#" class="text-light"><i class="bi bi-twitter" style="font-size: 1.5rem;"></i></a>
+        </div>
+        <div class="col-md-4 text-end">
+          <h5>About</h5>
+          <p>© 2025 MovieReview</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const line1Text = "Hello! Welcome";
+    const line2Text = "ยินดีต้อนรับเข้าสู่เว็บไซต์ของเรา";
+
+    const typeText = (element, text, delay = 100, callback = null) => {
+      let i = 0;
+      const typer = () => {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(typer, delay);
+        } else if (callback) {
+          callback();
+        }
+      };
+      typer();
+    };
+
+    const line1 = document.getElementById("line1");
+    const line2 = document.getElementById("line2");
+
+    const startTyping = () => {
+      line1.textContent = "";
+      line2.textContent = "";
+
+      let finished = 0;
+
+      const onFinished = () => {
+        finished++;
+        if (finished === 2) {
+          setTimeout(startTyping, 2000);
+        }
+      };
+
+      typeText(line1, line1Text, 100, onFinished);
+      typeText(line2, line2Text, 50, onFinished);
+    };
+
+    startTyping();
+  </script>
+</body>
+</html>
