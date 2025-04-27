@@ -5,7 +5,8 @@ ICT-12367
 ภายในโปรเจกต์มีตัวอย่างการทำงานเกี่ยวกับ Python, Web Development และ Data Processing
 
 
-git clone [https://github.com/NOTSTEPP30/ICT12367.git](https://github.com/preem090/ICT-12367-Project.git)
+git clone https://github.com/preem090/ICT-12367-Project.git
+
 
 ติดตั้ง Python (ถ้ายังไม่มี)
 สามารถดาวน์โหลด Python ได้จาก python.org
