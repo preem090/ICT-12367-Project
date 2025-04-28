@@ -42,3 +42,5 @@ python manage.py runserver
 
 
 manage.py
+![image](https://github.com/user-attachments/assets/94a08677-f2f0-4da3-bcc4-b1fad46eb179)
+
